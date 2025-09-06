@@ -38,55 +38,50 @@
   <section class="py-16 px-6 bg-black bg-opacity-70 text-white text-center">
     <h2 class="text-3xl font-bold mb-8">⭐ Premium Subscriptions</h2>
     <div class="grid md:grid-cols-4 gap-6 max-w-6xl mx-auto">
-      <!-- Daily Plan -->
       <div class="bg-white bg-opacity-20 rounded-2xl shadow-lg p-6 flex flex-col items-center">
         <h3 class="text-xl font-bold mb-2">Daily Tips</h3>
         <p class="text-3xl font-extrabold text-green-400 mb-4">Ksh 49</p>
-        <ul class="mb-6 text-sm">
-          <li>✔ 24hr Access</li>
-          <li>✔ Daily Match Predictions</li>
-          <li>✔ High Winrate Tips</li>
-        </ul>
-        <button onclick="openPayment('Daily Tips','49')" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg">Subscribe</button>
+        <button onclick="subscribe('daily','49')" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg">Subscribe</button>
       </div>
-      <!-- Weekly Plan -->
       <div class="bg-white bg-opacity-30 rounded-2xl shadow-lg p-6 flex flex-col items-center border-2 border-yellow-400">
         <h3 class="text-xl font-bold mb-2">Weekly Tips</h3>
         <p class="text-3xl font-extrabold text-yellow-400 mb-4">Ksh 199</p>
-        <ul class="mb-6 text-sm">
-          <li>✔ 7 Days Access</li>
-          <li>✔ All Daily Predictions</li>
-          <li>✔ Priority Support</li>
-        </ul>
-        <button onclick="openPayment('Weekly Tips','199')" class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-lg">Subscribe</button>
+        <button onclick="subscribe('weekly','199')" class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-lg">Subscribe</button>
       </div>
-      <!-- Monthly Plan -->
       <div class="bg-white bg-opacity-20 rounded-2xl shadow-lg p-6 flex flex-col items-center">
         <h3 class="text-xl font-bold mb-2">Monthly Tips</h3>
         <p class="text-3xl font-extrabold text-blue-400 mb-4">Ksh 399</p>
-        <ul class="mb-6 text-sm">
-          <li>✔ 30 Days Access</li>
-          <li>✔ Full Premium Predictions</li>
-          <li>✔ VIP Betting Insights</li>
-        </ul>
-        <button onclick="openPayment('Monthly Tips','399')" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">Subscribe</button>
+        <button onclick="subscribe('monthly','399')" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">Subscribe</button>
       </div>
-      <!-- Jackpot Plan -->
       <div class="bg-white bg-opacity-20 rounded-2xl shadow-lg p-6 flex flex-col items-center border-2 border-red-400">
         <h3 class="text-xl font-bold mb-2">Jackpot</h3>
         <p class="text-3xl font-extrabold text-red-400 mb-4">Ksh 1000</p>
-        <ul class="mb-6 text-sm">
-          <li>✔ Monthly Jackpot Predictions</li>
-          <li>✔ Exclusive Betting Tips</li>
-          <li>✔ VIP Access</li>
-        </ul>
-        <button onclick="openPayment('Jackpot','1000')" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg">Subscribe</button>
+        <button onclick="subscribe('jackpot','1000')" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg">Subscribe</button>
       </div>
     </div>
   </section>
 
+  <!-- 📊 Premium Bets (Locked until subscription) -->
+  <section id="premium-bets" class="py-16 px-6 bg-black bg-opacity-50 text-white text-center hidden">
+    <h2 class="text-3xl font-bold mb-6">🔥 PREMIUM PREDICTIONS</h2>
+    <div class="overflow-x-auto">
+      <table class="border border-gray-500 mx-auto text-left max-w-xl w-full">
+        <thead>
+          <tr class="bg-gray-800">
+            <th class="px-2 py-1 border border-gray-500">Match</th>
+            <th class="px-2 py-1 border border-gray-500">Prediction</th>
+            <th class="px-2 py-1 border border-gray-500">Date</th>
+          </tr>
+        </thead>
+        <tbody id="premiumBetsBody">
+          <tr><td colspan="3" class="text-center py-3">Subscribe to view premium bets 🔒</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
   <!-- 📊 Jackpot Table -->
-  <section id="free-bets" class="py-16 px-6 bg-black bg-opacity-50 text-white text-center">
+  <section id="jackpot" class="py-16 px-6 bg-black bg-opacity-50 text-white text-center">
     <h2 class="text-3xl font-bold mb-6">📊 JACKPOT</h2>
     <div class="overflow-x-auto">
       <table class="border border-gray-500 mx-auto text-left max-w-xl w-full">
@@ -116,15 +111,6 @@
       <div class="p-4 shadow rounded bg-transparent flex-shrink-0">
         <img src="./images/news4.PNG" alt="News 4" class="rounded-lg mb-2 cursor-pointer zoomable w-64">
       </div>
-      <div class="p-4 shadow rounded bg-transparent flex-shrink-0">
-        <img src="./images/news5.PNG" alt="News 5" class="rounded-lg mb-2 cursor-pointer zoomable w-64">
-      </div>
-      <div class="p-4 shadow rounded bg-transparent flex-shrink-0">
-        <img src="./images/news6.PNG" alt="News 6" class="rounded-lg mb-2 cursor-pointer zoomable w-64">
-      </div>
-      <div class="p-4 shadow rounded bg-transparent flex-shrink-0">
-        <img src="./images/news7.PNG" alt="News 7" class="rounded-lg mb-2 cursor-pointer zoomable w-64">
-      </div>
     </div>
   </section>
 
@@ -134,103 +120,93 @@
     <img id="modalImage" class="max-w-[90%] max-h-[90%] rounded-lg shadow-lg">
   </div>
 
-  <!-- 💳 Payment Modal -->
-  <div id="paymentModal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50">
-    <div class="bg-gray-900 text-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
-      <h2 id="planName" class="text-xl font-bold mb-4">Subscribe</h2>
-      <p id="planPrice" class="text-lg mb-4"></p>
-      <p class="text-sm text-gray-300 mb-6">Choose your payment method:</p>
-      <div class="flex flex-col gap-3">
-        <button onclick="payMpesa()" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg">M-Pesa STK Push</button>
-        <button onclick="payPayPal()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg">PayPal</button>
-        <button onclick="payStripe()" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg">Stripe</button>
-      </div>
-      <button onclick="closePayment()" class="mt-6 bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg">Cancel</button>
-    </div>
-  </div>
-
-  <!-- 🔒 Admin Section -->
-  <section id="adminSection" style="display:none;" class="py-12 px-6 bg-gray-900 text-white">
-    <h2 class="text-2xl font-bold mb-4">🔒 Admin: Add Match</h2>
-    <form id="adminForm" class="flex flex-col gap-3 max-w-md">
-      <input type="text" id="match" placeholder="Match (e.g. Man Utd vs Arsenal)" required class="p-3 text-black rounded-lg">
-      <input type="text" id="prediction" placeholder="Prediction (e.g. Over 2.5)" required class="p-3 text-black rounded-lg">
-      <input type="date" id="date" required class="p-3 text-black rounded-lg">
-      <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg">Add Match</button>
-    </form>
-  </section>
-
-  <!-- 🔑 Password Modal -->
-  <div id="passwordModal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50">
-    <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
-      <h2 class="text-xl font-bold mb-4 text-white">Admin Login</h2>
-      <input type="password" id="adminPassword" placeholder="Enter Password" class="p-3 text-black rounded-lg w-full mb-4">
-      <div class="flex justify-end gap-3">
-        <button id="cancelPwd" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">Cancel</button>
-        <button id="submitPwd" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">Login</button>
-      </div>
-    </div>
-  </div>
-
   <script>
-  // 🌍 Dynamic API Base
   const API_BASE = window.location.hostname === "localhost" 
     ? "http://localhost:5000" 
     : "https://primepicks-backend.onrender.com";
 
-  // 📰 Auto-scroll News Slideshow
+  // Auto-scroll News
   const slideshow = document.getElementById("news-slideshow");
   let scrollAmount = 0;
-  function autoScroll() {
+  setInterval(() => {
     const slideWidth = slideshow.querySelector("div").offsetWidth + 24;
     scrollAmount += slideWidth;
     if (scrollAmount >= slideshow.scrollWidth - slideshow.clientWidth) scrollAmount = 0;
     slideshow.scrollTo({ left: scrollAmount, behavior: "smooth" });
-  }
-  setInterval(autoScroll, 3000);
+  }, 3000);
 
-  // 🔍 Zoomable Images
-  const zoomableImages = document.querySelectorAll(".zoomable");
-  const modal = document.getElementById("imageModal");
-  const modalImg = document.getElementById("modalImage");
-  const closeModal = document.getElementById("closeModal");
-
-  zoomableImages.forEach(img => {
+  // Zoom
+  document.querySelectorAll(".zoomable").forEach(img => {
     img.addEventListener("click", () => {
-      modal.classList.remove("hidden");
-      modalImg.src = img.src;
-      history.pushState({ zoomed: true }, "");
+      document.getElementById("imageModal").classList.remove("hidden");
+      document.getElementById("modalImage").src = img.src;
     });
   });
+  document.getElementById("closeModal").addEventListener("click", () => {
+    document.getElementById("imageModal").classList.add("hidden");
+  });
 
-  function closeZoom() {
-    modal.classList.add("hidden");
-    modalImg.src = "";
-    if (history.state?.zoomed) history.back();
+  // 💳 Subscribe with Paystack
+  async function subscribe(plan, price) {
+    const email = prompt("Enter your email to continue:");
+    if (!email) return;
+
+    // Save email to localStorage for later use
+    localStorage.setItem("subscriberEmail", email);
+
+    try {
+      const res = await fetch(API_BASE + "/api/subscriptions/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, plan })
+      });
+      const data = await res.json();
+      if (data.status && data.data.authorization_url) {
+        window.location.href = data.data.authorization_url;
+      } else {
+        alert("❌ Failed to start payment");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("❌ Payment error");
+    }
   }
-  closeModal.addEventListener("click", closeZoom);
-  modal.addEventListener("click", (e) => { if (e.target === modal) closeZoom(); });
-  window.addEventListener("popstate", () => { closeZoom(); });
 
-  // 💳 Payment Modal Logic
-  let isAdmin = false;
-  let currentPlan = null;
-  let currentPrice = null;
-  function openPayment(plan, price) {
-    currentPlan = plan;
-    currentPrice = price;
-    document.getElementById("planName").innerText = plan;
-    document.getElementById("planPrice").innerText = "Ksh " + price;
-    document.getElementById("paymentModal").classList.remove("hidden");
-    document.getElementById("paymentModal").classList.add("flex");
+  // 🔓 Load Premium Bets if subscribed
+  async function loadPremiumBets() {
+    const email = localStorage.getItem("subscriberEmail");
+    if (!email) return;
+
+    try {
+      const res = await fetch(`${API_BASE}/api/premium-bets?email=${email}`);
+      if (res.ok) {
+        const bets = await res.json();
+        if (bets && bets.length > 0) {
+          document.getElementById("premium-bets").classList.remove("hidden");
+          const betsBody = document.getElementById("premiumBetsBody");
+          betsBody.innerHTML = "";
+          bets.forEach(bet => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td class="px-4 py-2 border border-gray-500">${bet.match}</td>
+              <td class="px-4 py-2 border border-gray-500">${bet.prediction}</td>
+              <td class="px-4 py-2 border border-gray-500">${bet.date}</td>
+            `;
+            betsBody.appendChild(row);
+          });
+        }
+      }
+    } catch (err) {
+      console.error("Error loading premium bets", err);
+    }
   }
-  function closePayment() { document.getElementById("paymentModal").classList.add("hidden"); }
-  async function payMpesa() { alert("M-Pesa payment flow coming soon!"); closePayment(); }
-  function payPayPal() { alert("PayPal flow coming soon!"); closePayment(); }
-  async function payStripe() { alert("Stripe flow coming soon!"); closePayment(); }
 
-  // 📊 Load Bets
-  async function loadDailyBets() {
+  document.addEventListener("DOMContentLoaded", () => {
+    loadPremiumBets(); // check on load
+  });
+
+  // Jackpot (always free)
+  async function loadJackpot() {
     try {
       const res = await fetch(API_BASE + "/api/bets");
       const bets = await res.json();
@@ -238,7 +214,6 @@
       betsBody.innerHTML = "";
       bets.forEach(bet => {
         const row = document.createElement("tr");
-        row.dataset.id = bet._id;
         row.innerHTML = `
           <td class="px-4 py-2 border border-gray-500">${bet.match}</td>
           <td class="px-4 py-2 border border-gray-500">${bet.prediction}</td>
@@ -246,72 +221,9 @@
         `;
         betsBody.appendChild(row);
       });
-    } catch (err) { console.error("Error loading bets", err); }
+    } catch {}
   }
-  document.addEventListener("DOMContentLoaded", loadDailyBets);
-
-  // 🔐 Toggle Admin with CTRL+ALT+0
-  document.addEventListener("keydown", function(e) {
-    if (e.ctrlKey && e.altKey && e.key === "0") {
-      if (!isAdmin) {
-        const modal = document.getElementById("passwordModal");
-        modal.classList.remove("hidden");
-        modal.classList.add("flex");
-      } else {
-        const adminSection = document.getElementById("adminSection");
-        adminSection.style.display = (adminSection.style.display === "none") ? "block" : "none";
-      }
-    }
-  });
-
-  // 🔑 Password Modal
-  document.getElementById("cancelPwd").addEventListener("click", () => {
-    document.getElementById("passwordModal").classList.add("hidden");
-  });
-  document.getElementById("submitPwd").addEventListener("click", () => {
-    const pwd = document.getElementById("adminPassword").value;
-    if (pwd === "******") {
-      document.getElementById("passwordModal").classList.add("hidden");
-      document.getElementById("adminSection").style.display = "block";
-      document.getElementById("adminPassword").value = "";
-      isAdmin = true;
-    } else {
-      alert("❌ Wrong password. Access denied.");
-    }
-  });
-
-  // ➕ Add Bet
-  document.getElementById("adminForm").addEventListener("submit", async function(e) {
-    e.preventDefault();
-    const match = document.getElementById("match").value;
-    const prediction = document.getElementById("prediction").value;
-    const date = document.getElementById("date").value;
-
-    const res = await fetch(API_BASE + "/api/add-bet", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ match, prediction, date })
-    });
-
-    if (res.ok) {
-      const newBet = await res.json();
-      alert("✅ Bet added successfully!");
-      document.getElementById("adminForm").reset();
-
-      const betsBody = document.getElementById("betsBody");
-      const row = document.createElement("tr");
-      row.dataset.id = newBet._id;
-      row.innerHTML = `
-        <td class="px-4 py-2 border border-gray-500">${newBet.match}</td>
-        <td class="px-4 py-2 border border-gray-500">${newBet.prediction}</td>
-        <td class="px-4 py-2 border border-gray-500">${newBet.date}</td>
-      `;
-      betsBody.appendChild(row);
-    } else {
-      alert("❌ Failed to add bet");
-    }
-  });
+  document.addEventListener("DOMContentLoaded", loadJackpot);
   </script>
-
 </body>
 </html>
