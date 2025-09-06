@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>PrimePicks Soccer Tips</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -10,78 +10,78 @@
   background:url('images/background.PNG') no-repeat center center fixed;
   background-size:cover;color:white;">
 
-  <!-- 🌟 Hero Section -->
+  <!-- Hero -->
   <section class="flex flex-col items-center justify-center text-center px-6 py-24 bg-black bg-opacity-50 text-white">
     <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-snug text-center">
-      <span class="text-green-400">PrimePicks</span> <span class="text-red-400"> Soccer</span><br />
-      <span class="text-green-400">Tips</span> for<span class="text-red-400"> Edge Betting</span>
+      <span class="text-green-400">PrimePicks</span> <span class="text-red-400"> Soccer</span><br/>
+      <span class="text-green-400">Tips</span> for <span class="text-red-400">Edge Betting</span>
     </h1>
     <p class="text-lg mb-6">Join our community and never miss a profitable winrate.</p>
-    <button onclick="alert('📲 Mobile app download coming soon!')" 
-      class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg shadow-md">
-      Download PrimePicks Mobile App
-    </button>
+    <button onclick="alert('📲 Mobile app download coming soon!')" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg shadow-md">Download PrimePicks Mobile App</button>
   </section>
 
-  <!-- 📰 Yesterday Premium -->
+  <!-- Yesterday Premium -->
   <section class="p-6 bg-black bg-opacity-60">
     <div class="flex justify-center space-x-8">
       <div class="p-4 shadow rounded bg-white/10 backdrop-blur-md text-center">
         <h2 class="text-white text-lg font-bold mb-2">YESTERDAY PREMIUM</h2>
-        <img src="./images/view1.PNG" alt="View 1" 
-             class="rounded-lg mb-2 cursor-pointer zoomable opacity-80">
+        <img src="./images/view1.PNG" alt="View 1" class="rounded-lg mb-2 cursor-pointer zoomable opacity-80">
       </div>
     </div>
   </section>
 
-  <!-- ⭐ Premium Subscription Plans -->
+  <!-- Premium Plans -->
   <section class="py-16 px-6 bg-black bg-opacity-70 text-white text-center">
     <h2 class="text-3xl font-bold mb-8">⭐ Premium Subscriptions</h2>
     <div class="grid md:grid-cols-4 gap-6 max-w-6xl mx-auto">
       <div class="bg-white bg-opacity-20 rounded-2xl shadow-lg p-6 flex flex-col items-center">
         <h3 class="text-xl font-bold mb-2">Daily Tips</h3>
         <p class="text-3xl font-extrabold text-green-400 mb-4">Ksh 49</p>
-        <button onclick="subscribe('daily','49')" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg">Subscribe</button>
+        <ul class="mb-6 text-sm">
+          <li>✔ 24hr Access</li>
+          <li>✔ Daily Match Predictions</li>
+          <li>✔ High Winrate Tips</li>
+        </ul>
+        <button onclick="subscribe('daily')" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg">Subscribe</button>
       </div>
+
       <div class="bg-white bg-opacity-30 rounded-2xl shadow-lg p-6 flex flex-col items-center border-2 border-yellow-400">
         <h3 class="text-xl font-bold mb-2">Weekly Tips</h3>
         <p class="text-3xl font-extrabold text-yellow-400 mb-4">Ksh 199</p>
-        <button onclick="subscribe('weekly','199')" class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-lg">Subscribe</button>
+        <ul class="mb-6 text-sm">
+          <li>✔ 7 Days Access</li>
+          <li>✔ All Daily Predictions</li>
+          <li>✔ Priority Support</li>
+        </ul>
+        <button onclick="subscribe('weekly')" class="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-lg">Subscribe</button>
       </div>
+
       <div class="bg-white bg-opacity-20 rounded-2xl shadow-lg p-6 flex flex-col items-center">
         <h3 class="text-xl font-bold mb-2">Monthly Tips</h3>
         <p class="text-3xl font-extrabold text-blue-400 mb-4">Ksh 399</p>
-        <button onclick="subscribe('monthly','399')" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">Subscribe</button>
+        <ul class="mb-6 text-sm">
+          <li>✔ 30 Days Access</li>
+          <li>✔ Full Premium Predictions</li>
+          <li>✔ VIP Betting Insights</li>
+        </ul>
+        <button onclick="subscribe('monthly')" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">Subscribe</button>
       </div>
+
       <div class="bg-white bg-opacity-20 rounded-2xl shadow-lg p-6 flex flex-col items-center border-2 border-red-400">
         <h3 class="text-xl font-bold mb-2">Jackpot</h3>
         <p class="text-3xl font-extrabold text-red-400 mb-4">Ksh 1000</p>
-        <button onclick="subscribe('jackpot','1000')" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg">Subscribe</button>
+        <ul class="mb-6 text-sm">
+          <li>✔ Monthly Jackpot Predictions</li>
+          <li>✔ Exclusive Betting Tips</li>
+          <li>✔ VIP Access</li>
+        </ul>
+        <button onclick="subscribe('jackpot')" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg">Subscribe</button>
       </div>
     </div>
   </section>
 
-  <!-- 📊 Premium Bets (Locked until subscription) -->
-  <section id="premium-bets" class="py-16 px-6 bg-black bg-opacity-50 text-white text-center hidden">
-    <h2 class="text-3xl font-bold mb-6">🔥 PREMIUM PREDICTIONS</h2>
-    <div class="overflow-x-auto">
-      <table class="border border-gray-500 mx-auto text-left max-w-xl w-full">
-        <thead>
-          <tr class="bg-gray-800">
-            <th class="px-2 py-1 border border-gray-500">Match</th>
-            <th class="px-2 py-1 border border-gray-500">Prediction</th>
-            <th class="px-2 py-1 border border-gray-500">Date</th>
-          </tr>
-        </thead>
-        <tbody id="premiumBetsBody">
-          <tr><td colspan="3" class="text-center py-3">Subscribe to view premium bets 🔒</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- 📊 Jackpot Table -->
-  <section id="jackpot" class="py-16 px-6 bg-black bg-opacity-50 text-white text-center">
+  <!-- Jackpot Table (unchanged) -->
+  <section id="free-bets" class="py-16 px-6 bg-black bg-opacity-50 text-white text-center">
     <h2 class="text-3xl font-bold mb-6">📊 JACKPOT</h2>
     <div class="overflow-x-auto">
       <table class="border border-gray-500 mx-auto text-left max-w-xl w-full">
@@ -99,46 +99,68 @@
     </div>
   </section>
 
-  <!-- 📰 News Slideshow -->
+  <!-- News slideshow -->
   <section class="p-6 bg-black bg-opacity-60">
     <div id="news-slideshow" class="flex space-x-6 overflow-hidden">
-      <div class="p-4 shadow rounded bg-transparent flex-shrink-0">
-        <img src="./images/news2.PNG" alt="News 2" class="rounded-lg mb-2 cursor-pointer zoomable w-64">
-      </div>
-      <div class="p-4 shadow rounded bg-transparent flex-shrink-0">
-        <img src="./images/news3.PNG" alt="News 3" class="rounded-lg mb-2 cursor-pointer zoomable w-64">
-      </div>
-      <div class="p-4 shadow rounded bg-transparent flex-shrink-0">
-        <img src="./images/news4.PNG" alt="News 4" class="rounded-lg mb-2 cursor-pointer zoomable w-64">
-      </div>
+      <div class="p-4 shadow rounded bg-transparent flex-shrink-0"><img src="./images/news2.PNG" class="rounded-lg mb-2 cursor-pointer zoomable w-64"></div>
+      <div class="p-4 shadow rounded bg-transparent flex-shrink-0"><img src="./images/news3.PNG" class="rounded-lg mb-2 cursor-pointer zoomable w-64"></div>
+      <div class="p-4 shadow rounded bg-transparent flex-shrink-0"><img src="./images/news4.PNG" class="rounded-lg mb-2 cursor-pointer zoomable w-64"></div>
+      <div class="p-4 shadow rounded bg-transparent flex-shrink-0"><img src="./images/news5.PNG" class="rounded-lg mb-2 cursor-pointer zoomable w-64"></div>
     </div>
   </section>
 
-  <!-- 🔍 Zoom Modal -->
+  <!-- Zoom modal -->
   <div id="imageModal" class="hidden fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
     <span id="closeModal" class="absolute top-4 right-6 text-white text-3xl cursor-pointer">&times;</span>
     <img id="modalImage" class="max-w-[90%] max-h-[90%] rounded-lg shadow-lg">
   </div>
 
-  <script>
-  const API_BASE = window.location.hostname === "localhost" 
-    ? "http://localhost:5000" 
-    : "https://primepicks-backend.onrender.com";
+  <!-- Payment modal (fallback) -->
+  <div id="paymentModal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50">
+    <div class="bg-gray-900 text-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
+      <h2 id="planName" class="text-xl font-bold mb-4">Subscribe</h2>
+      <p id="planPrice" class="text-lg mb-4"></p>
+      <p class="text-sm text-gray-300 mb-6">You will be redirected to secure payment.</p>
+      <button onclick="closePayment()" class="mt-6 bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg">Cancel</button>
+    </div>
+  </div>
 
-  // Auto-scroll News
+  <!-- After-return modal: ask for email to validate subscription -->
+  <div id="verifyModal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full text-center text-black">
+      <h3 class="text-lg font-bold mb-3">Complete subscription</h3>
+      <p class="mb-3">Enter the email you used to pay so we can unlock premium bets for you.</p>
+      <input id="verifyEmail" type="email" placeholder="you@example.com" class="w-full p-2 mb-3 border rounded" />
+      <div class="flex gap-2 justify-center">
+        <button id="verifyBtn" class="bg-green-600 text-white px-4 py-2 rounded">Unlock Premium</button>
+        <button onclick="closeVerify()" class="bg-gray-400 text-black px-4 py-2 rounded">Cancel</button>
+      </div>
+      <p id="verifyMsg" class="mt-3 text-sm"></p>
+    </div>
+  </div>
+
+<script>
+  // Dynamic API base
+  const API_BASE = window.location.hostname === "localhost" ? "http://localhost:5000" : (window.API_BASE || "https://primepicks-backend.onrender.com");
+
+  // slideshow auto scroll
   const slideshow = document.getElementById("news-slideshow");
   let scrollAmount = 0;
   setInterval(() => {
-    const slideWidth = slideshow.querySelector("div").offsetWidth + 24;
+    if (!slideshow) return;
+    const card = slideshow.querySelector("div");
+    if (!card) return;
+    const slideWidth = card.offsetWidth + 24;
     scrollAmount += slideWidth;
     if (scrollAmount >= slideshow.scrollWidth - slideshow.clientWidth) scrollAmount = 0;
     slideshow.scrollTo({ left: scrollAmount, behavior: "smooth" });
   }, 3000);
 
-  // Zoom
+  // zoom images
   document.querySelectorAll(".zoomable").forEach(img => {
     img.addEventListener("click", () => {
-      document.getElementById("imageModal").classList.remove("hidden");
+      const modal = document.getElementById("imageModal");
+      modal.classList.remove("hidden");
       document.getElementById("modalImage").src = img.src;
     });
   });
@@ -146,13 +168,10 @@
     document.getElementById("imageModal").classList.add("hidden");
   });
 
-  // 💳 Subscribe with Paystack
-  async function subscribe(plan, price) {
-    const email = prompt("Enter your email to continue:");
+  // ---------------- SUBSCRIBE FLOW ----------------
+  async function subscribe(plan) {
+    const email = prompt("Enter your email for the subscription (you'll use this after payment):");
     if (!email) return;
-
-    // Save email to localStorage for later use
-    localStorage.setItem("subscriberEmail", email);
 
     try {
       const res = await fetch(API_BASE + "/api/subscriptions/create", {
@@ -161,69 +180,96 @@
         body: JSON.stringify({ email, plan })
       });
       const data = await res.json();
-      if (data.status && data.data.authorization_url) {
+      if (data.status && data.data && data.data.authorization_url) {
+        // open Paystack payment page
         window.location.href = data.data.authorization_url;
       } else {
-        alert("❌ Failed to start payment");
+        alert("❌ Could not initialize payment. See console for details.");
+        console.error("init error", data);
       }
     } catch (err) {
       console.error(err);
-      alert("❌ Payment error");
+      alert("❌ Payment initialization failed.");
     }
   }
 
-  // 🔓 Load Premium Bets if subscribed
-  async function loadPremiumBets() {
-    const email = localStorage.getItem("subscriberEmail");
-    if (!email) return;
-
-    try {
-      const res = await fetch(`${API_BASE}/api/premium-bets?email=${email}`);
-      if (res.ok) {
-        const bets = await res.json();
-        if (bets && bets.length > 0) {
-          document.getElementById("premium-bets").classList.remove("hidden");
-          const betsBody = document.getElementById("premiumBetsBody");
-          betsBody.innerHTML = "";
-          bets.forEach(bet => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-              <td class="px-4 py-2 border border-gray-500">${bet.match}</td>
-              <td class="px-4 py-2 border border-gray-500">${bet.prediction}</td>
-              <td class="px-4 py-2 border border-gray-500">${bet.date}</td>
-            `;
-            betsBody.appendChild(row);
-          });
-        }
-      }
-    } catch (err) {
-      console.error("Error loading premium bets", err);
-    }
+  function closePayment() {
+    document.getElementById("paymentModal").classList.add("hidden");
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    loadPremiumBets(); // check on load
+  // If user returns from Paystack (callback), open verify modal automatically
+  // Paystack redirect doesn't include a success param by default, so we'll show verify modal if page loaded from paystack
+  // This is a friendly UX: user will enter payment email to check subscription activation via webhook.
+  window.addEventListener("DOMContentLoaded", () => {
+    // if URL contains 'reference' or came from paystack, show verify dialog
+    const url = new URL(window.location.href);
+    if (url.searchParams.get("reference") || document.referrer.includes("paystack")) {
+      showVerify();
+    }
+    loadDailyBets();
   });
 
-  // Jackpot (always free)
-  async function loadJackpot() {
+  function showVerify() {
+    document.getElementById("verifyModal").classList.remove("hidden");
+    // prefill email if user stored earlier in localStorage
+    const lastEmail = localStorage.getItem("pp_email");
+    if (lastEmail) document.getElementById("verifyEmail").value = lastEmail;
+  }
+  function closeVerify() {
+    document.getElementById("verifyModal").classList.add("hidden");
+  }
+
+  document.getElementById("verifyBtn").addEventListener("click", async () => {
+    const email = document.getElementById("verifyEmail").value.trim();
+    if (!email) { document.getElementById("verifyMsg").innerText = "Enter a valid email."; return; }
+    document.getElementById("verifyMsg").innerText = "Checking subscription...";
+
+    try {
+      const res = await fetch(`${API_BASE}/api/premium-bets?email=${encodeURIComponent(email)}`);
+      if (res.ok) {
+        const bets = await res.json();
+        document.getElementById("verifyMsg").innerText = "Subscription active — premium unlocked!";
+        localStorage.setItem("pp_email", email);
+        showPremium(bets);
+        closeVerify();
+      } else {
+        const body = await res.json().catch(()=>({}));
+        document.getElementById("verifyMsg").innerText = "Subscription not active yet. Wait a moment or try again.";
+        console.warn("premium check failed", body);
+      }
+    } catch (err) {
+      console.error(err);
+      document.getElementById("verifyMsg").innerText = "Error checking subscription.";
+    }
+  });
+
+  // Show premium bets in a modal or console (example: simple alert / console)
+  function showPremium(bets) {
+    // here you can show a fancy modal – for simplicity we'll log to console and alert count
+    console.log("Premium bets:", bets);
+    alert(`You unlocked ${bets.length} premium bets — check console for details`);
+  }
+
+  // ---------------- LOAD JACKPOT / FREE BETS ----------------
+  async function loadDailyBets() {
     try {
       const res = await fetch(API_BASE + "/api/bets");
       const bets = await res.json();
-      const betsBody = document.getElementById("betsBody");
-      betsBody.innerHTML = "";
+      const tbody = document.getElementById("betsBody");
+      tbody.innerHTML = "";
       bets.forEach(bet => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td class="px-4 py-2 border border-gray-500">${bet.match}</td>
-          <td class="px-4 py-2 border border-gray-500">${bet.prediction}</td>
-          <td class="px-4 py-2 border border-gray-500">${bet.date}</td>
-        `;
-        betsBody.appendChild(row);
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td class="px-4 py-2 border border-gray-500">${bet.match}</td>
+                        <td class="px-4 py-2 border border-gray-500">${bet.prediction}</td>
+                        <td class="px-4 py-2 border border-gray-500">${bet.date}</td>`;
+        tbody.appendChild(tr);
       });
-    } catch {}
+      if (!bets.length) tbody.innerHTML = `<tr><td colspan="3" class="text-center py-3">No bets available</td></tr>`;
+    } catch (err) {
+      console.error("loadDailyBets", err);
+    }
   }
-  document.addEventListener("DOMContentLoaded", loadJackpot);
-  </script>
+</script>
+
 </body>
 </html>
