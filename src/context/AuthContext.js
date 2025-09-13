@@ -9,9 +9,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (token) {
-      api.get('/me')
-        .then(res => setUser(res.data))
-        .catch(() => setUser(null));
+      api.get('/me').then(res => setUser(res.data)).catch(() => setUser(null));
     }
   }, [token]);
 
