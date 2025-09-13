@@ -11,4 +11,5 @@ root.render(
   </React.StrictMode>
 );
 
-reportWebVitals(console.log);
+// Disabled Web Vitals logging
+reportWebVitals();
