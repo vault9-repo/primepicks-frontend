@@ -1,16 +1,28 @@
+// src/pages/PaymentCallback.js
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function PaymentCallback() {
+const PaymentCallback = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // You can verify payment here with backend if needed
-    // For now, just redirect to login
-    navigate("/");
+    // Optional: verify payment with backend
+    // axios.get(`${API_BASE}/subscription/verify?reference=${reference}`)
+
+    // Redirect to login page with success state
+    const timer = setTimeout(() => {
+      navigate("/", { state: { paymentSuccess: true } });
+    }, 2000);
+
+    return () => clearTimeout(timer);
   }, [navigate]);
 
-  return <p>Processing payment... Redirecting to login.</p>;
-}
+  return (
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h2>Payment Successful!</h2>
+      <p>Redirecting to login...</p>
+    </div>
+  );
+};
 
 export default PaymentCallback;
