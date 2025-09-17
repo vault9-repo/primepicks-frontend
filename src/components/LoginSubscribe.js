@@ -8,7 +8,7 @@ function LoginSubscribe() {
   const [plan, setPlan] = useState("daily");
   const [isLogin, setIsLogin] = useState(true); // toggle form
   const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false); // new loading state
+  const [loading, setLoading] = useState(false);
 
   // Handle user login
   const handleLogin = async () => {
@@ -17,7 +17,6 @@ function LoginSubscribe() {
       const res = await axios.post(`${API_BASE}/auth/login`, { email, password });
       setMessage("Login successful! Redirecting...");
       console.log(res.data.token);
-      // TODO: Redirect to dashboard when ready
     } catch (err) {
       setMessage(err.response?.data?.message || "Login failed");
     } finally {
@@ -39,6 +38,14 @@ function LoginSubscribe() {
     }
   };
 
+  // Subscription plans
+  const plans = [
+    { key: "daily", label: "Daily - 50 KES" },
+    { key: "weekly", label: "Weekly - 300 KES" },
+    { key: "biweekly", label: "Biweekly - 600 KES" },
+    { key: "monthly", label: "Monthly - 1000 KES" },
+  ];
+
   return (
     <div
       style={{
@@ -53,13 +60,15 @@ function LoginSubscribe() {
     >
       <div
         style={{
-          backgroundColor: "rgba(255, 255, 255, 0.85)",
+          backgroundColor: "rgba(0, 0, 0, 0.7)", // black glassy
           padding: "30px",
-          borderRadius: "10px",
+          borderRadius: "15px",
           maxWidth: "400px",
           width: "90%",
           textAlign: "center",
-          boxShadow: "0px 4px 20px rgba(0,0,0,0.2)",
+          boxShadow: "0px 4px 20px rgba(0,0,0,0.3)",
+          backdropFilter: "blur(10px)",
+          color: "#fff",
         }}
       >
         <h2>{isLogin ? "Login" : "Subscribe"}</h2>
@@ -69,32 +78,56 @@ function LoginSubscribe() {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          style={{ display: "block", margin: "10px auto", width: "100%", padding: "10px" }}
+          style={{
+            display: "block",
+            margin: "10px auto",
+            width: "100%",
+            padding: "10px",
+            borderRadius: "5px",
+            border: "none",
+          }}
         />
         <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          style={{ display: "block", margin: "10px auto", width: "100%", padding: "10px" }}
+          style={{
+            display: "block",
+            margin: "10px auto",
+            width: "100%",
+            padding: "10px",
+            borderRadius: "5px",
+            border: "none",
+          }}
         />
 
         {!isLogin && (
-          <select
-            value={plan}
-            onChange={(e) => setPlan(e.target.value)}
-            style={{ margin: "10px auto", width: "100%", padding: "10px" }}
-          >
-            <option value="daily">Daily - 50 KES</option>
-            <option value="weekly">Weekly - 300 KES</option>
-            <option value="biweekly">Biweekly - 600 KES</option>
-            <option value="monthly">Monthly - 1000 KES</option>
-          </select>
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "10px", margin: "15px 0" }}>
+            {plans.map((p) => (
+              <button
+                key={p.key}
+                onClick={() => setPlan(p.key)}
+                style={{
+                  flex: "1 1 45%",
+                  padding: "10px",
+                  cursor: "pointer",
+                  backgroundColor: plan === p.key ? "#007bff" : "rgba(255,255,255,0.1)",
+                  color: plan === p.key ? "#fff" : "#fff",
+                  border: "none",
+                  borderRadius: "8px",
+                  transition: "0.3s",
+                }}
+              >
+                {p.label}
+              </button>
+            ))}
+          </div>
         )}
 
         <button
           onClick={isLogin ? handleLogin : handleSubscribe}
-          disabled={loading} // disable during loading
+          disabled={loading}
           style={{
             margin: "10px auto",
             padding: "10px 20px",
@@ -113,7 +146,7 @@ function LoginSubscribe() {
           {loading ? (
             <div
               style={{
-                border: "3px solid #f3f3f3",
+                border: "3px solid rgba(255,255,255,0.3)",
                 borderTop: "3px solid #fff",
                 borderRadius: "50%",
                 width: "18px",
@@ -128,7 +161,7 @@ function LoginSubscribe() {
 
         <p
           onClick={() => setIsLogin(!isLogin)}
-          style={{ cursor: "pointer", color: "blue", marginTop: "15px" }}
+          style={{ cursor: "pointer", color: "#00f", marginTop: "15px" }}
         >
           {isLogin ? "New user? Subscribe here" : "Already have an account? Login"}
         </p>
@@ -136,7 +169,6 @@ function LoginSubscribe() {
         {message && <p style={{ marginTop: "10px", color: "red" }}>{message}</p>}
       </div>
 
-      {/* Spinner animation */}
       <style>{`
         @keyframes spin {
           0% { transform: rotate(0deg); }
