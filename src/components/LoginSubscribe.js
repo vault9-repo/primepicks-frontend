@@ -1,182 +1,203 @@
+// src/components/LoginSubscribe.js
 import React, { useState } from "react";
-import axios from "axios";
 import { API_BASE } from "../config";
 
-function LoginSubscribe() {
+export default function LoginSubscribe({ onLoginSuccess }) {
+  const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [plan, setPlan] = useState("daily");
-  const [isLogin, setIsLogin] = useState(true); // toggle form
-  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
-  // Handle user login
-  const handleLogin = async () => {
-    setLoading(true);
-    try {
-      const res = await axios.post(`${API_BASE}/auth/login`, { email, password });
-      setMessage("Login successful! Redirecting...");
-      console.log(res.data.token);
-    } catch (err) {
-      setMessage(err.response?.data?.message || "Login failed");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Handle user subscription
-  const handleSubscribe = async () => {
-    setLoading(true);
-    try {
-      const res = await axios.post(`${API_BASE}/subscription/subscribe`, { email, password, plan });
-      const paymentUrl = res.data.payment_url;
-      window.location.href = paymentUrl; // redirect to Paystack
-    } catch (err) {
-      setMessage(err.response?.data?.message || "Subscription failed");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Subscription plans
-  const plans = [
-    { key: "daily", label: "Daily - 50 KES" },
-    { key: "weekly", label: "Weekly - 300 KES" },
-    { key: "biweekly", label: "Biweekly - 600 KES" },
-    { key: "monthly", label: "Monthly - 1000 KES" },
+  const packages = [
+    { plan: "daily", label: "Daily - 50 KES" },
+    { plan: "weekly", label: "Weekly - 300 KES" },
+    { plan: "biweekly", label: "Biweekly - 600 KES" },
+    { plan: "monthly", label: "Monthly - 1000 KES" },
   ];
 
+  // Handle login
+  async function handleLogin(e) {
+    e.preventDefault();
+    setLoading(true);
+    setMessage("");
+    try {
+      const res = await fetch(`${API_BASE}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setMessage(data.message || "Login failed");
+      } else {
+        localStorage.setItem("token", data.token);
+        if (onLoginSuccess) onLoginSuccess();
+      }
+    } catch (err) {
+      setMessage("Login error");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // Handle subscription & payment
+  async function handleSubscribeInit(e) {
+    e.preventDefault();
+    setMessage("");
+    if (!email || !password) return setMessage("Please fill email & password");
+    setLoading(true);
+    try {
+      const res = await fetch(`${API_BASE}/subscription/initialize`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password, plan }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setMessage(data.message || "Failed to start payment");
+        setLoading(false);
+        return;
+      }
+      window.location.href = data.authorization_url;
+    } catch (err) {
+      console.error(err);
+      setMessage("Error starting payment");
+      setLoading(false);
+    }
+  }
+
+  // Inline styles
+  const containerStyle = {
+    minHeight: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundImage: "url('/assets/BACKGROUND.PNG')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  };
+
+  const cardStyle = {
+    background: "rgba(0,0,0,0.7)",
+    padding: "24px",
+    borderRadius: "12px",
+    color: "#fff",
+    minWidth: "320px",
+    boxShadow: "0 4px 20px rgba(0,0,0,0.5)",
+  };
+
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundImage: "url('/assets/BACKGROUND.PNG')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <div
-        style={{
-          backgroundColor: "rgba(0, 0, 0, 0.7)", // black glassy
-          padding: "30px",
-          borderRadius: "15px",
-          maxWidth: "400px",
-          width: "90%",
-          textAlign: "center",
-          boxShadow: "0px 4px 20px rgba(0,0,0,0.3)",
-          backdropFilter: "blur(10px)",
-          color: "#fff",
-        }}
-      >
-        <h2>{isLogin ? "Login" : "Subscribe"}</h2>
+    <div style={containerStyle}>
+      <div style={cardStyle}>
+        <h2 style={{ textAlign: "center", marginBottom: "12px" }}>
+          {isLogin ? "Login" : "Subscribe"}
+        </h2>
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={{
-            display: "block",
-            margin: "10px auto",
-            width: "100%",
-            padding: "10px",
-            borderRadius: "5px",
-            border: "none",
-          }}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={{
-            display: "block",
-            margin: "10px auto",
-            width: "100%",
-            padding: "10px",
-            borderRadius: "5px",
-            border: "none",
-          }}
-        />
-
-        {!isLogin && (
-          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "10px", margin: "15px 0" }}>
-            {plans.map((p) => (
-              <button
-                key={p.key}
-                onClick={() => setPlan(p.key)}
-                style={{
-                  flex: "1 1 45%",
-                  padding: "10px",
-                  cursor: "pointer",
-                  backgroundColor: plan === p.key ? "#007bff" : "rgba(255,255,255,0.1)",
-                  color: plan === p.key ? "#fff" : "#fff",
-                  border: "none",
-                  borderRadius: "8px",
-                  transition: "0.3s",
-                }}
-              >
-                {p.label}
-              </button>
-            ))}
-          </div>
-        )}
-
-        <button
-          onClick={isLogin ? handleLogin : handleSubscribe}
-          disabled={loading}
-          style={{
-            margin: "10px auto",
-            padding: "10px 20px",
-            cursor: loading ? "not-allowed" : "pointer",
-            width: "100%",
-            fontSize: "16px",
-            backgroundColor: "#007bff",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+        <form
+          onSubmit={isLogin ? handleLogin : handleSubscribeInit}
+          style={{ display: "flex", flexDirection: "column", gap: "12px" }}
         >
-          {loading ? (
-            <div
-              style={{
-                border: "3px solid rgba(255,255,255,0.3)",
-                borderTop: "3px solid #fff",
-                borderRadius: "50%",
-                width: "18px",
-                height: "18px",
-                animation: "spin 1s linear infinite",
-              }}
-            ></div>
-          ) : (
-            isLogin ? "Login" : "Subscribe & Pay"
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            type="email"
+            required
+            style={{ padding: "10px", borderRadius: "8px", border: "none" }}
+          />
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            type="password"
+            required
+            style={{ padding: "10px", borderRadius: "8px", border: "none" }}
+          />
+
+          {!isLogin && (
+            <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+              {packages.map((p) => (
+                <button
+                  type="button"
+                  key={p.plan}
+                  onClick={() => setPlan(p.plan)}
+                  style={{
+                    padding: "8px 12px",
+                    borderRadius: "8px",
+                    border: "none",
+                    cursor: "pointer",
+                    background:
+                      plan === p.plan
+                        ? "#3498db"
+                        : "rgba(255,255,255,0.15)",
+                    color: "#fff",
+                  }}
+                  disabled={loading}
+                >
+                  {p.label}
+                </button>
+              ))}
+            </div>
           )}
-        </button>
 
-        <p
-          onClick={() => setIsLogin(!isLogin)}
-          style={{ cursor: "pointer", color: "#00f", marginTop: "15px" }}
-        >
-          {isLogin ? "New user? Subscribe here" : "Already have an account? Login"}
+          <button
+            type="submit"
+            disabled={loading}
+            style={{
+              padding: "10px",
+              borderRadius: "8px",
+              border: "none",
+              background: "#2ecc71",
+              color: "#fff",
+              fontWeight: "bold",
+              cursor: loading ? "not-allowed" : "pointer",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {loading ? (
+              <div
+                style={{
+                  width: 18,
+                  height: 18,
+                  border: "3px solid #f3f3f3",
+                  borderTop: "3px solid #3498db",
+                  borderRadius: "50%",
+                  animation: "spin 1s linear infinite",
+                }}
+              />
+            ) : isLogin ? (
+              "Login"
+            ) : (
+              "Pay & Subscribe"
+            )}
+          </button>
+        </form>
+
+        <p style={{ marginTop: 12, textAlign: "center" }}>
+          {isLogin ? "No account?" : "Already have an account?"}{" "}
+          <span
+            onClick={() => setIsLogin(!isLogin)}
+            style={{ color: "#3498db", cursor: "pointer" }}
+          >
+            {isLogin ? "Subscribe" : "Login"}
+          </span>
         </p>
 
-        {message && <p style={{ marginTop: "10px", color: "red" }}>{message}</p>}
-      </div>
+        {message && (
+          <p style={{ color: "salmon", marginTop: 8, textAlign: "center" }}>
+            {message}
+          </p>
+        )}
 
-      <style>{`
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-      `}</style>
+        {/* Spinner animation */}
+        <style>
+          {`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}
+        </style>
+      </div>
     </div>
   );
 }
-
-export default LoginSubscribe;
